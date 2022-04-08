@@ -3,6 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+//
+const mongoose = require('mongoose');
+var passport = require('passport');
+var session = require('express-session');
+var MongoDBStore = require('connect-mongodb-session')(session);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
