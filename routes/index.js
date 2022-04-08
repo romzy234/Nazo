@@ -9,8 +9,8 @@ router.get('/', function(req, res, next) {
 
 router.get('/', controller.index);
 router.get('/home', controller.getHome);
-router.get('/login', controller.index);
-router.get('/signup', controller.index);
+router.get('/login', controller.getLogin);
+router.get('/signup', controller.getReg);
 router.get('/sms-verfication', controller.index);
 router.get('/forget', controller.index);
 
