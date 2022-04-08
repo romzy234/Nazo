@@ -8,17 +8,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/', controller.index);
+router.get('/home', controller.getHome);
 router.get('/login', controller.index);
 router.get('/signup', controller.index);
 router.get('/sms-verfication', controller.index);
 router.get('/forget', controller.index);
-router.get('/', controller.index);
-router.get('/', controller.index);
-router.get('/', controller.index);
-router.get('/', controller.index);
-router.get('/', controller.index);
-router.get('/', controller.index);
-router.get('/', controller.index);
-router.get('/', controller.index);
+
 
 module.exports = router;
