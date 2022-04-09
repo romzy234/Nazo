@@ -1,5 +1,6 @@
 const user = require('../model/user')
 const {rad} = require('../tools/randomm')
+const {verifySms} = require('../sms/verify')
 
 /**Index page */
 exports.index = (req,res)=>{
@@ -25,7 +26,8 @@ exports.getSignUp = (req,res)=>{
  */
 exports.postSignUp = (req,res)=>{
     data = req.body.phone
-
+    var password = rad()
+    var code = rad()
     //check,send sms then 
     
 
@@ -35,19 +37,22 @@ exports.postSignUp = (req,res)=>{
         if(!user){
         const newUser = new User({
             phone: req.body.phone,
-            password: rad(),
+            password: password,
+            code:code
         });
         
             newUser.save()
             .then((user) => {
                 res.redirect(`/verifyPhone/${data}`)
+                //send sms
+                verifySms(data,code)
             }).catch(error=>{
                 res.status(500)
             });
         }else if(user.verified){
             res.redirect(`/login`)
         }else{
-            res.redirect(`/verifyPhone/${data}`)
+            res.redirect(`/verifyPhone/${data}/${code}`)
 
         }
     }).catch(error => {
