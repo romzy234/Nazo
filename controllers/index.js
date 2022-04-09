@@ -71,3 +71,16 @@ exports.postVerifyPhone = (req,res)=>{
     console.log(req.body);
     res.redirect(`/home`)
 }
+/**Login
+ * @todo - 
+ */
+exports.getLogin = (req,res)=>{
+    res.render('login')
+}
+
+/**Register
+ * @todo - 
+ */
+ exports.getReg = (req,res)=>{
+    res.render('register')
+}
