@@ -10,8 +10,11 @@ router.get('/', function(req, res, next) {
 router.get('/', controller.index);
 router.get('/home', controller.getHome);
 router.get('/login', controller.index);
-router.get('/signup', controller.index);
-router.get('/sms-verfication', controller.index);
+router.get('/signup', controller.getSignUp);
+router.post('/signup', controller.postSignUp);
+router.get('/verifyphone/:id', controller.getVerifyPhone);
+router.post('/verifyphone/', controller.postVerifyPhone);
+
 router.get('/forget', controller.index);
 
 
