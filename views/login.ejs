@@ -44,11 +44,11 @@
             <h4>Fill the form to log in</h4>
         </div>
         <div class="section mt-2 mb-5 p-3">
-            <form action="">
+            <form action="/login" method="post">
                 <div class="form-group basic">
                     <div class="input-wrapper">
                         <label class="label" for="phone">Phone Number</label>
-                        <input type="tel" class="form-control" id="phone" placeholder="Your phone number">
+                        <input type="tel" class="form-control" id="phone" placeholder="Your phone number" pattern="^[0][7-9]\d{9}$" title="Entet Correct Phone Number Example 09036071895" required>
                         <i class="clear-input"><ion-icon name="close-circle"></ion-icon></i>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
 
                 <div class="form-links mt-2">
                     <div>
-                        <a href="register.html">Register Now</a>
+                        <a href="/signup">Register Now</a>
                     </div>
                     <div><a href="forgot-pin.html" class="text-muted">Forgot pin?</a></div>
                 </div>
