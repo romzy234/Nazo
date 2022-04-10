@@ -21,22 +21,24 @@ var UserSchema = mongoose.Schema({
         type:Boolean,
         require:true
     },
-    // email:{
-    //     type:String,
-    //     require:true 
-    // },
-    // name:{
-    //     type:String,
-    //     require:true
-    // },
-    // profilePic:{
-    //     type:String,
-    //     require:true
-    // },
-    // about:{
-    //     type:String,
-    //     require:true
-    // },
+    firstName:{
+        type:String,
+    },
+    lastName:{
+        type:String,
+    },
+    name:{
+        type:String,
+    },
+    profilePic:{
+        type:String,
+    },
+    age:{
+        type:Number,
+    },
+    gender:{
+        type:String,
+    },
     // setting:{
     //     type:Object,
     //     require:true

@@ -126,3 +126,31 @@ const verifyStatus = (id) =>{
         console.log(error);
     })
 }
+
+
+//USed to finish registration
+exports.postDone = (req,res)=>{
+    const d = req.body
+    const obj = {
+        firstName:d.firstName,
+        lastName:d.lastName,
+        age:d.age*1,
+        gender:d.gender,
+        profilePic:`https://avatars.dicebear.com/api/${d.gender}/:${d.firstName}.svg`,
+        name: d.firstName +'-'+d.lastName
+    }
+
+    // console.log(obj.status);
+    user.findById({
+        _id: req.user._id
+    }).then(userss => {
+        userss = _.extend(userss, obj);
+        userss.save(
+            ()=>{
+                res.redirect("/home")
+            }
+        )
+    }).catch(error => {
+        console.log(error);
+    })
+}

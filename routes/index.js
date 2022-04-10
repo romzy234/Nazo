@@ -3,6 +3,7 @@ var router = express.Router();
 const passport = require('passport');
 const controller = require('../controllers/index')
 const checkAuth = require('../middleware/checkAuth')
+const finishAuth = require('../middleware/finishAuth')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -10,12 +11,14 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/', controller.index);
-router.get('/home', checkAuth,controller.getHome);
+router.get('/home', checkAuth,finishAuth,controller.getHome);
 router.get('/login', controller.getLogin);
 router.get('/signup', controller.getSignUp);
 router.post('/signup', controller.postSignUp);
 router.get('/verifyphone/:id/:code', controller.getVerifyPhone);
 router.post('/verifyphone/', controller.postVerifyPhone);
+router.post('/done', controller.postDone);
+
 
 router.get('/forget', controller.index);
 
