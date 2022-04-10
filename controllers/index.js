@@ -43,6 +43,12 @@ exports.getSignUp = (req,res)=>{
     res.render('signup')
 }
 
+exports.getSettings = (req,res)=>{
+    res.render('settings',{
+        user: req.user
+    })
+}
+
 
 
 /**Post Signup

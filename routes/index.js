@@ -21,6 +21,7 @@ router.get('/verifyphone/:id/:code', controller.getVerifyPhone);
 router.post('/verifyphone/', controller.postVerifyPhone);
 router.post('/done', controller.postDone);
 
+router.get('/settings', checkAuth,finishAuth,controller.getSettings);
 
 router.get('/forgot', controller.getForgot);
 router.post('/forgot', controller.postForgot);
