@@ -5,7 +5,9 @@ const controller = require('../controllers/index')
 const checkAuth = require('../middleware/checkAuth')
 const finishAuth = require('../middleware/finishAuth')
 
-/* GET home page. */
+/* 
+GET home page. 
+*/
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
