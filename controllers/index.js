@@ -1,6 +1,8 @@
 const user = require('../model/user')
 const {rad} = require('../tools/randomm')
-const {verifySms} = require('../sms/verify')
+const {verifySms} = require('../sms/verify') 
+const {forgotSms} = require('../sms/forgot')
+const {WelcomeSms} = require('../sms/welcome')
 const _ = require('lodash');
 
 /**Index page */
@@ -85,7 +87,7 @@ exports.postVerifyPhone = (req,res)=>{
                     res.locals.logUser = result
                     req.user = result
                     res.redirect(`/home?password=${result.password}`)
-                    verifySms(result.phone,result.password)
+                    WelcomeSms(result.phone,result.password)
                     verifyStatus(result._id)
                 }else{
                 res.send("invaild Verification Code try again ")
@@ -153,4 +155,30 @@ exports.postDone = (req,res)=>{
     }).catch(error => {
         console.log(error);
     })
+}
+
+
+exports.postForgot = (req,res)=>{
+    const data = req.body
+    user.findOne({
+        phone:"+234"+data.phone
+    }).then(
+        result=>{
+            if(result){
+                res.send('check sms for new password')
+                forgotSms(result.phone,result.password)
+            }else{
+                res.send("invaild request number dont exist ")
+                console.log("error");
+            }
+        }
+    ).catch(error => {
+        console.log(error);
+    })
+}
+
+/**Get forget password
+ */
+ exports.getForgot = (req,res)=>{
+    res.render('forget')
 }

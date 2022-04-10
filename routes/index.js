@@ -20,7 +20,8 @@ router.post('/verifyphone/', controller.postVerifyPhone);
 router.post('/done', controller.postDone);
 
 
-router.get('/forget', controller.index);
+router.get('/forgot', controller.getForgot);
+router.post('/forgot', controller.postForgot);
 
 
 
@@ -29,7 +30,7 @@ router.post('/login',passport.authenticate('local', { failureRedirect: '/login',
 
 router.get('/logout', function(req, res, next) {
   req.logout();
-  res.redirect('/users');
+  res.redirect('/login');
 });
 
 
