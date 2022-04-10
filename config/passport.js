@@ -1,12 +1,11 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-// const connection = require('./database');
-const User = require('../models/user');
+const User = require('../model/user');
 
 
-const verifyCallback = (email, password, done) => {
+const verifyCallback = (username, password, done) => {
 
-    User.findOne({ email: email.toLowerCase() })
+    User.findOne({ phone:"+234"+username.toLowerCase() })
         .then((user) => {
 
             if (!user) { return done(null, false) }

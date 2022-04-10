@@ -9,7 +9,7 @@ var passport = require('passport');
 var session = require('express-session');
 var MongoDBStore = require('connect-mongodb-session')(session);
 const { database } = require('./database/config')
-
+require('./config/passport');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var ussdRouter = require('./routes/ussd');
@@ -17,7 +17,7 @@ var ussdRouter = require('./routes/ussd');
 var app = express();
 // Database intergration
 
-var db = database.cloud // change data 
+var db = database.local // change data 
 // mongodb connector 
 mongoose.connect(db, {
   useNewUrlParser: true,useUnifiedTopology:true
@@ -55,6 +55,13 @@ app.use(session({
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use((req, res, next) => {
+  res.locals.logUser = req.user;  
+  next();
+});
 
 app.use(logger('dev'));
 app.use(express.json());

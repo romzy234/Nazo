@@ -82,6 +82,7 @@ exports.postVerifyPhone = (req,res)=>{
             if(result){
                 console.log(result);
                 if(result.code == data.code){
+                    res.locals.logUser = result
                     res.redirect("/home")
                     verifyStatus(result._id)
                 }else{
