@@ -1,6 +1,7 @@
 const user = require('../model/user')
 const {rad} = require('../tools/randomm')
 const {verifySms} = require('../sms/verify')
+const _ = require('lodash');
 
 /**Index page */
 exports.index = (req,res)=>{
@@ -25,34 +26,33 @@ exports.getSignUp = (req,res)=>{
  * @todo redirect to sms verification
  */
 exports.postSignUp = (req,res)=>{
-    data = req.body.phone
+    data = '+234'+req.body.phone
     var password = rad()
     var code = rad()
-    //check,send sms then 
-    
 
-    user.findById({
+    user.findOne({
         phone:  data
-    }).then(user => {   
-        if(!user){
-        const newUser = new User({
-            phone: req.body.phone,
+    }).then(result => {   
+        if(!result){
+        const newUser = new user({
+            phone: data,
             password: password,
-            code:code
+            code:code,
+            verified:false
         });
         
             newUser.save()
-            .then((user) => {
-                res.redirect(`/verifyPhone/${data}`)
+            .then((result) => {
+                res.redirect(`/verifyPhone/${data}/${code}`)
                 //send sms
                 verifySms(data,code)
             }).catch(error=>{
                 res.status(500)
             });
-        }else if(user.verified){
+        }else if(result.verified){
             res.redirect(`/login`)
         }else{
-            res.redirect(`/verifyPhone/${data}/${code}`)
+            res.redirect(`/verifyPhone/${data}/${result.code}`)
 
         }
     }).catch(error => {
@@ -64,7 +64,8 @@ exports.postSignUp = (req,res)=>{
 
 exports.getVerifyPhone = (req,res)=>{
     res.render('verifyphone',{
-        phone: req.params.id
+        phone: req.params.id,
+        code: req.params.code
     })
 }
 
@@ -73,8 +74,25 @@ exports.getVerifyPhone = (req,res)=>{
  * @todo redirect to sms verification
  */
 exports.postVerifyPhone = (req,res)=>{
-    console.log(req.body);
-    res.redirect(`/home`)
+    const data = req.body
+    user.findOne({
+        phone:data.phone
+    }).then(
+        result=>{
+            if(result){
+                console.log(result);
+                if(result.code == data.code){
+                    res.redirect("/home")
+                    verifyStatus(result._id)
+                }else{
+                res.send("invaild Verification Code try again ")
+                }
+            }else{
+                res.send("invaild request number dont exist ")
+                console.log("error");
+            }
+        }
+    )
 }
 /**Login
  * @todo - 
@@ -88,4 +106,20 @@ exports.getLogin = (req,res)=>{
  */
  exports.getReg = (req,res)=>{
     res.render('register')
+}
+
+const verifyStatus = (id) =>{
+    const obj = {
+        verified:true
+    }
+
+    // console.log(obj.status);
+    user.findById({
+        _id: id
+    }).then(userss => {
+        userss = _.extend(userss, obj);
+        userss.save()
+    }).catch(error => {
+        console.log(error);
+    })
 }

@@ -49,9 +49,9 @@
         </div>
         <div class="section mt-2 mb-5 p-3">
             <form action="/verifyphone" method="post">
-                
+                <input type="hidden" name="phone" value="<%= phone%>">
                 <div class="form-group">
-                    <input type="text" class="form-control verification-input" id="smscode" placeholder="••••" maxlength="4">
+                    <input type="text" class="form-control verification-input" name="code" id="smscode" placeholder="••••" maxlength="4">
                 </div>
 
                 <div class="form-button-group">

@@ -17,6 +17,10 @@ var UserSchema = mongoose.Schema({
         type:String,
         require:true
     },
+    verified:{
+        type:Boolean,
+        require:true
+    },
     // email:{
     //     type:String,
     //     require:true 
