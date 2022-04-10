@@ -36,8 +36,27 @@ var UserSchema = mongoose.Schema({
     age:{
         type:Number,
     },
+    amount:{
+        type:Number,
+    },
+    saving:{
+        type:Number,
+    },
+    income:{
+        type:Number,
+    },
+    loan:{
+        type:Number,
+    },
+    expenses:{
+        type:Number,
+    },
     gender:{
         type:String,
+    },
+    notifications:{
+        type:Array,
+        require:true
     },
     // setting:{
     //     type:Object,

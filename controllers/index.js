@@ -1,4 +1,5 @@
 const user = require('../model/user')
+const transactions = require('../model/transaction')
 const {rad} = require('../tools/randomm')
 const {verifySms} = require('../sms/verify') 
 const {forgotSms} = require('../sms/forgot')
@@ -11,7 +12,24 @@ exports.index = (req,res)=>{
 }
 
 exports.getHome = (req,res)=>{
-    res.render('home')
+
+    transactions.find({
+        phone:req.user.phone
+    }) 
+    .limit(5)
+    .sort({_id:-1})
+    .then(
+        results=>{
+            console.log(results);
+            res.render('home',{
+                user : req.user,
+                transaction:results
+            })
+        }
+    )
+    .catch(error=>{
+        res.status(500);
+    })
 }
 
 /**Get Signup
@@ -139,7 +157,12 @@ exports.postDone = (req,res)=>{
         age:d.age*1,
         gender:d.gender,
         profilePic:`https://avatars.dicebear.com/api/${d.gender}/:${d.firstName}.svg`,
-        name: d.firstName +'-'+d.lastName
+        name: d.firstName +'-'+d.lastName,
+        amount:0,
+        savings:0,
+        income:0,
+        loan:0,
+        expenses:0,
     }
 
     // console.log(obj.status);
