@@ -49,6 +49,66 @@ exports.getSettings = (req,res)=>{
     })
 }
 
+exports.getBanking = (req,res)=>{
+    res.render('banking',{
+        user: req.user
+    })
+}
+
+const loan = require('../model/loan')
+exports.getLoans = (req,res)=>{
+   loan.find({
+        phone:req.user.phone
+    }) 
+    .sort({_id:-1})
+    .then(
+        results=>{
+            res.render('loans',{
+                user : req.user,
+                loan:results,
+                dayjs:dayjs
+            })
+        }
+    )
+    .catch(error=>{
+        res.status(500);
+    })
+}
+
+exports.getLoan = (req,res)=>{
+    res.render('loan',{
+        user: req.user
+    })
+}
+
+
+
+
+exports.postLoan = (req,res)=>{
+console.log(req.body);
+    var phone = req.user.phone
+    var name = req.body.name
+    var amount = req.body.amount*1
+    var reason = req.body.reason
+
+
+        const newLoan = new loan({
+            phone: phone,
+            name: name,
+            amount:amount,
+            reason:reason,
+            approve:false
+        });
+        
+
+            newLoan.save()
+            .then((result) => {
+                res.redirect(`/loans`)
+            }).catch(error=>{
+                res.status(500)
+            })
+}
+
 
 
 /**Post Signup

@@ -22,6 +22,11 @@ router.post('/verifyphone/', controller.postVerifyPhone);
 router.post('/done', controller.postDone);
 
 router.get('/settings', checkAuth,finishAuth,controller.getSettings);
+router.get('/banking', checkAuth,finishAuth,controller.getBanking);
+router.get('/loans', checkAuth,finishAuth,controller.getLoans);
+router.get('/loan', checkAuth,finishAuth,controller.getLoan);
+router.post('/loan', checkAuth,finishAuth,controller.postLoan);
+
 
 router.get('/forgot', controller.getForgot);
 router.post('/forgot', controller.postForgot);

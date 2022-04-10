@@ -17,7 +17,7 @@ var ussdRouter = require('./routes/ussd');
 var app = express();
 // Database intergration
 
-var db = database.cloud // change data 
+var db = database.local // change data 
 // mongodb connector 
 mongoose.connect(db, {
   useNewUrlParser: true,useUnifiedTopology:true

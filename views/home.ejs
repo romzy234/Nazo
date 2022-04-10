@@ -199,8 +199,10 @@
                 <a href="/transaction" class="item">
                     <div class="detail">
                         <% if(value.type == 'debit'){%>
-                            <div class=" bg-danger image-block imaged " style="width: 30px;height: 30px;"></div><%}else{%>
-                             <div class=" bg-success image-block imaged " style="width: 30px;height: 30px;"></div><%}%>
+                            <ion-icon class='text-danger mx-2 my-auto' size='large' name="arrow-forward-outline"></ion-icon>
+                            <%}else{%>
+                                <ion-icon class='text-success mx-2 my-auto' size='large' name="arrow-down-outline"></ion-icon>
+                                <%}%>
                         <div>
                             <strong><%=value.type.toUpperCase()%></strong>
                             <p><%= dayjs(value.createdAt).format('YYYY-MMMM-DD HH:mm')%></p>
