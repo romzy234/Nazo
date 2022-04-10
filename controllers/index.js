@@ -160,6 +160,12 @@ exports.getVerifyPhone = (req,res)=>{
     })
 }
 
+exports.gettranfer = (req,res)=>{
+    res.render('transfer',{
+        user: req.user
+    })
+}
+
 /**Post Sms Verification
  * @todo check if exist and send[] exist page
  * @todo redirect to sms verification
