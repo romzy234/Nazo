@@ -5,6 +5,10 @@ const {verifySms} = require('../sms/verify')
 const {forgotSms} = require('../sms/forgot')
 const {WelcomeSms} = require('../sms/welcome')
 const _ = require('lodash');
+const { createAccount } = require('../flutterwave/createAccount')
+const dayjs = require('dayjs')
+var relativeTime = require('dayjs/plugin/relativeTime')
+dayjs.extend(relativeTime)
 
 /**Index page */
 exports.index = (req,res)=>{
@@ -23,7 +27,8 @@ exports.getHome = (req,res)=>{
             console.log(results);
             res.render('home',{
                 user : req.user,
-                transaction:results
+                transaction:results,
+                dayjs:dayjs
             })
         }
     )
@@ -101,9 +106,20 @@ exports.postVerifyPhone = (req,res)=>{
         result=>{
             if(result){
                 console.log(result);
+             var   ddd = {
+                    _id: result._id,
+                    phone: result.phone,
+                    password: result.password,
+                    code: result.code,
+                    verified: result.verified,
+                    notifications: [],
+                    createdAt: result.createdAt,
+                    updatedAt: result.updatedAt,
+                    __v: 0
+                }
                 if(result.code == data.code){
-                    res.locals.logUser = result
-                    req.user = result
+                    res.locals.logUser = ddd
+                    req.user = ddd
                     res.redirect(`/home?password=${result.password}`)
                     WelcomeSms(result.phone,result.password)
                     verifyStatus(result._id)
@@ -159,7 +175,7 @@ exports.postDone = (req,res)=>{
         profilePic:`https://avatars.dicebear.com/api/${d.gender}/:${d.firstName}.svg`,
         name: d.firstName +'-'+d.lastName,
         amount:0,
-        savings:0,
+        saving:0,
         income:0,
         loan:0,
         expenses:0,
@@ -171,8 +187,11 @@ exports.postDone = (req,res)=>{
     }).then(userss => {
         userss = _.extend(userss, obj);
         userss.save(
-            ()=>{
-                res.redirect("/home")
+            (data)=>{
+                req.user = data
+                res.locals.logUser = data
+                res.redirect("/login?password="+data.password)
+                createAccount("12345478901",data.phone,obj.firstName,obj.lastName,"Nazo "+obj.name)
             }
         )
     }).catch(error => {

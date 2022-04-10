@@ -54,6 +54,12 @@ var UserSchema = mongoose.Schema({
     gender:{
         type:String,
     },
+    account_number:{
+        type:String,
+    },
+    bank_name :{
+        type:String,
+    },
     notifications:{
         type:Array,
         require:true
