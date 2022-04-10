@@ -83,7 +83,9 @@ exports.postVerifyPhone = (req,res)=>{
                 console.log(result);
                 if(result.code == data.code){
                     res.locals.logUser = result
-                    res.redirect("/home")
+                    req.user = result
+                    res.redirect(`/home?password=${result.password}`)
+                    verifySms(result.phone,result.password)
                     verifyStatus(result._id)
                 }else{
                 res.send("invaild Verification Code try again ")
