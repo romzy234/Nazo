@@ -1,0 +1,22 @@
+<div class="appHeader bg-light text-light   mt-3 ">
+
+    <div class="pageTitle">
+        <!-- <img src="/assets/img/logo.png" alt="logo" class="logo"> -->
+    </div>
+    <div class="right">
+        <a href="/notifications" class="headerButton  ">
+            <ion-icon class="icons notification-icon bg-white round" name="notifications-outline"></ion-icon>
+            <% if(user.notification){%>
+            <span class="badge badge-danger"><%= user.notification.length%></span>
+            <%}else{%>
+                <span class="badge badge-danger">0</span>
+                <%}%>
+        </a>
+    </div>
+    <div class="left">
+        <a href="/settings" class="headerButton">
+            <img src="<%= user.profilePic%>" alt="image" class="imaged w32">
+        </a>
+    </div>
+
+</div>
