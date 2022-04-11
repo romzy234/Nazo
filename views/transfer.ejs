@@ -45,11 +45,11 @@
         <div class="section full mb-2 nb mt-4">
             <div class="wide-block pb-1 pt-2 nb ">
 
-                <form action="verify-transfer.html">
+                <form action="/transfer" method="post">
                     <div class="form-group boxed">
                         <div class="input-wrapper">
                             <label class="label" for="amount">Amount</label>
-                            <input type="number" class="form-control" id="amount" placeholder="₦ 0.00">
+                            <input type="number" class="form-control" id="amount" name="amount" required placeholder="₦ 0.00" max="<%=user.amount%>" min="100">
                             <i class="clear-input"><ion-icon name="close-circle"></ion-icon></i>
                         </div>
                     </div>
@@ -57,11 +57,11 @@
                     <div class="form-group boxed">
                         <div class="input-wrapper">
                             <label class="label" for="bank">Bank</label>
-                            <select class="form-control custom-select" id="bank">
-                                <option value="0">Select a bank</option>
-                                <option value="1">Wema</option>
-                                <option value="2">Sterling</option>
-                                <option value="3">FMBC</option>
+                            <select class="form-control custom-select" name="bank" id="bank">
+                                <option value="Flutterwave">Select a bank</option>
+                                <option value="FMBC">FMBC</option>
+                                <option value="Sterling">Sterling</option>
+                                <option value="Wema">Wema</option>
                             </select>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                     <div class="form-group boxed">
                         <div class="input-wrapper">
                             <label class="label" for="accNum">Account Number</label>
-                            <input type="number" class="form-control" id="accNum" placeholder="0123456789">
+                            <input type="number" class="form-control" name="acc" id="accNum" placeholder="0123456789" minlength="10" maxlength="11" required>
                             <i class="clear-input"><ion-icon name="close-circle"></ion-icon></i>
                         </div>
                     </div>
@@ -77,11 +77,11 @@
                     <div class="form-group boxed">
                         <div class="input-wrapper">
                             <label class="label" for="cat">Category</label>
-                            <select class="form-control custom-select" id="cat">
-                                <option value="0">Select a Category</option>
-                                <option value="1"> feeding</option>
-                                <option value="2">change</option>
-                                <option value="3">another</option>
+                            <select class="form-control custom-select" id="cat" name="cat">
+                                <option value="None">Select a Category</option>
+                                <option value="Feeding"> Feeding</option>
+                                <option value="Shopping">Shopping</option>
+                                <option value="Traveling">Traveling</option>
                             </select>
                         </div>
                     </div>
@@ -89,7 +89,7 @@
                     <div class="form-group boxed">
                         <div class="input-wrapper">
                             <label class="label" for="note">Add a Note</label>
-                            <textarea id="note" rows="2" class="form-control" placeholder="Write what this is for"></textarea>
+                            <textarea id="note" rows="2" class="form-control" placeholder="Write what this is for" name="detail"></textarea>
                             <i class="clear-input"><ion-icon name="close-circle"></ion-icon></i>
                         </div>
                     </div>

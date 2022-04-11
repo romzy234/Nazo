@@ -19,7 +19,7 @@ var transactionSchema = mongoose.Schema({
     detail:{
         type:String,
     },
-    accout:{
+    account:{
         type:String,
     },
     type:{

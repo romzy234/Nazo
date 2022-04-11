@@ -10,6 +10,7 @@ const dayjs = require('dayjs')
 var relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.extend(relativeTime)
 const loan = require('../model/loan')
+const{addCredit,addDebit} = require('../tools/transaction')
 
 
 /**Index page */
@@ -261,8 +262,9 @@ exports.postDone = (req,res)=>{
         userss = _.extend(userss, obj);
         userss.save(
             (data)=>{
-                res.redirect("/login")
                 createAccount("12345478901",data.phone,obj.firstName,obj.lastName,"Nazo "+obj.name)
+                addCredit(data.phone,1000,'System','Welcome','Welcome Gift','23456789098')
+                res.redirect("/login")
             }
         )
     }).catch(error => {
@@ -334,3 +336,28 @@ exports.getTransactions = (req,res)=>{
      })
  }
  
+
+exports.postTransfer = (req,res)=>{
+    const data = req.body
+    const newTransaction = new transactions({
+        phone: req.user.phone,
+        amount: data.amount*1,
+        type:'debit',
+        account: data.acc,
+        bank:data.bank,
+        detail: data.detail,
+        category : data.cat,
+    });
+        newTransaction.save( ()=>{
+            user.updateOne({ phone:req.user.phone }, { $inc: { amount: -data.amount } }, ()=>{
+
+            var not = {
+                time:Date.now(),
+                message: `₦${data.amount} was Sent to ${data.acc} Successful`,
+                title:'Money Sent Successful'
+            }
+            user.updateOne({ phone:req.user.phone}, { $push: { notifications:not } })
+            })
+            res.render('transferGood')
+        })
+}
