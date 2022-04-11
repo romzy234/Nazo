@@ -64,6 +64,12 @@ var UserSchema = mongoose.Schema({
         type:Array,
         require:true
     },
+    investments:{
+        type:Array
+    },
+    backing:{
+        type:Array
+    },
     // setting:{
     //     type:Object,
     //     require:true

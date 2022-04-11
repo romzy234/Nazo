@@ -190,21 +190,7 @@ exports.postVerifyPhone = (req,res)=>{
     }).then(
         result=>{
             if(result){
-                console.log(result);
-             var   ddd = {
-                    _id: result._id,
-                    phone: result.phone,
-                    password: result.password,
-                    code: result.code,
-                    verified: result.verified,
-                    notifications: [],
-                    createdAt: result.createdAt,
-                    updatedAt: result.updatedAt,
-                    __v: 0
-                }
                 if(result.code == data.code){
-                    res.locals.logUser = ddd
-                    req.user = ddd
                     res.redirect(`/home?password=${result.password}`)
                     WelcomeSms(result.phone,result.password)
                     verifyStatus(result._id)
@@ -264,6 +250,8 @@ exports.postDone = (req,res)=>{
         income:0,
         loan:0,
         expenses:0,
+        investments:[],
+        backing:[]
     }
 
     // console.log(obj.status);
@@ -273,9 +261,7 @@ exports.postDone = (req,res)=>{
         userss = _.extend(userss, obj);
         userss.save(
             (data)=>{
-                req.user = data
-                res.locals.logUser = data
-                res.redirect("/login?password="+data.password)
+                res.redirect("/login")
                 createAccount("12345478901",data.phone,obj.firstName,obj.lastName,"Nazo "+obj.name)
             }
         )
