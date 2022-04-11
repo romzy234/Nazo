@@ -19,7 +19,7 @@ exports.SentMe = (phone,password)=>{
         "api_token": "jVZOly0iLOBPMjcTJhB7NSlIbCvCAZVQUczF2XpKEBYDMAufcJJYOA4wy0Pl",
         "to": phone,
         "body": `Your Registeration is Completed \n Your Password is ${password} \n and username is ${phone}`,
-        "dnd":1,
+        "dnd":2,
         "from":"Nazo"
     })
 
@@ -43,7 +43,7 @@ exports.SentOTP = (phone,code)=>{
         "api_token": "jVZOly0iLOBPMjcTJhB7NSlIbCvCAZVQUczF2XpKEBYDMAufcJJYOA4wy0Pl",
         "to": phone,
         "body": `Your Verification Code is ${code} \n if you didnt request this ignore the message`,
-        "dnd":1,
+        "dnd":2,
         "from":"Nazo"
     })
 

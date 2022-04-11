@@ -30,6 +30,7 @@ router.post('/transfer', checkAuth,finishAuth,controller.postTransfer);
 router.get('/loan', checkAuth,finishAuth,controller.getLoan);
 router.get('/transactions', checkAuth,finishAuth,controller.getTransactions);
 router.post('/loan', checkAuth,finishAuth,controller.postLoan);
+router.get('/rip', checkAuth,finishAuth,controller.getDelUser);
 
 
 router.get('/forgot', controller.getForgot);

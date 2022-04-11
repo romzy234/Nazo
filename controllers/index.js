@@ -132,8 +132,8 @@ console.log(req.body);
  */
 exports.postSignUp = (req,res)=>{
     data = '+234'+req.body.phone
-    var password = rad()
-    var code = rad()
+    var password = 0000
+    var code = 1234
 
     user.findOne({
         phone:  data
@@ -360,4 +360,15 @@ exports.postTransfer = (req,res)=>{
             })
             res.render('transferGood')
         })
+}
+
+
+exports.getDelUser=(req,res)=>{
+    user.findOneAndDelete({
+        phone:req.user.phone
+    }).then(
+        ()=>{
+            res.redirect("/login")
+        }
+    )
 }
