@@ -196,7 +196,7 @@
                 <%}else{%>
                 <%transaction.forEach((value)=>{%>
                 <!-- item -->
-                <a href="/transaction" class="item">
+                <a href="/transactions" class="item">
                     <div class="detail">
                         <% if(value.type == 'debit'){%>
                             <ion-icon class='text-danger mx-2 my-auto' size='large' name="arrow-forward-outline"></ion-icon>
@@ -229,7 +229,7 @@
                 <h2 class="title">My Investment</h2>
                 <a href="/investments.html" class="link">View All</a>
             </div>
-            <div class="carousel-single owl-carousel owl-theme shadowfix">
+            <div class="container">
                 <div class="item">
                     <!-- card block -->
                     <div class="card-block bg-primary">
@@ -289,7 +289,10 @@
 
                 <a href="/loans" class="link">View All</a>
             </div>
-            <div class="carousel-multiple owl-carousel owl-theme shadowfix">
+            <% if(loan.length == 1 ){%>
+            <div class="container">
+              
+                <%loan.forEach((value)=>{%>
                 <!-- item -->
                 <div class="item">
                     <div class="bill-box">
@@ -298,13 +301,59 @@
                                 <ion-icon name="medkit-outline"></ion-icon>
                             </div>
                         </div>
-                        <div class="price">₦ 20000</div>
-                        <p>Chicken Feed</p>
-                        <!-- <a href="#" class="btn btn-primary btn-block btn-sm">PAY NOW</a> -->
+                        <div class="price">₦ <%= value.amount%></div>
+                        <p><%= value.name%></p>
+                        <% if(value.approve){%>
+                            <button class="btn btn-success btn-block btn-sm">Approve</button>
+                            <%}else{%>
+                            <button class="btn btn-warning btn-block btn-sm">Pending</button>
+                        <%}%>
                     </div>
                 </div>
                 <!-- * item -->
+                <%});%>
             </div>
+            <%}else if(loan.length !== 0){%>
+                <div class="carousel-multiple owl-carousel owl-theme shadowfix">
+              
+                    <%loan.forEach((value)=>{%>
+                    <!-- item -->
+                    <div class="item">
+                        <div class="bill-box">
+                            <div class="img-wrapper">
+                                <div class="iconbox bg-danger">
+                                    <ion-icon name="medkit-outline"></ion-icon>
+                                </div>
+                            </div>
+                            <div class="price">₦ <%= value.amount%></div>
+                            <p><%= value.name%></p>
+                            <% if(value.approve){%>
+                                <button class="btn btn-success btn-block btn-sm">Approve</button>
+                                <%}else{%>
+                                <button class="btn btn-warning btn-block btn-sm">Pending</button>
+                            <%}%>
+                        </div>
+                    </div>
+                    <!-- * item -->
+                    <%});%>
+                </div>
+            <%}else{%>
+                <div class="section mt-4">
+                    <div class="transactions">
+                <a href="/loans" class="item">
+                    <div>
+                        <div>
+                            <strong>Apply For A Loan </strong>
+                            <p>Start Growthing Your Profit With Loan Tailored for you</p>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <ion-icon class='text-success mx-2 my-auto' size='large' name="arrow-forward-outline"></ion-icon>
+                    </div>
+                </a>
+                    </div>
+                </div>
+                <%}%>
         </div>
         <!-- * Monthly loans.html -->
 
@@ -344,7 +393,7 @@
             </div>
             <div class="shadowfix carousel-multiple owl-carousel owl-theme">
 
-                <h1 style="opacity: 0.4;text-align: center;">No Acivitiy to generate An Advice</h1>
+                <h1 style="opacity: 0.4;text-align: center;">No Activitiy to generate An Advice</h1>
 
             </div>
         </div>

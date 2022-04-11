@@ -9,6 +9,8 @@ const { createAccount } = require('../flutterwave/createAccount')
 const dayjs = require('dayjs')
 var relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.extend(relativeTime)
+const loan = require('../model/loan')
+
 
 /**Index page */
 exports.index = (req,res)=>{
@@ -25,11 +27,22 @@ exports.getHome = (req,res)=>{
     .then(
         results=>{
             console.log(results);
-            res.render('home',{
-                user : req.user,
-                transaction:results,
-                dayjs:dayjs
-            })
+            loan.find({
+                phone:req.user.phone
+            }).then(
+               loan  =>{
+                res.render('home',{
+                    user : req.user,
+                    transaction:results,
+                    loan:loan,
+                    dayjs:dayjs
+                })
+               } 
+            ).catch(
+                err =>{
+                    console.log(err);
+                }
+            )
         }
     )
     .catch(error=>{
@@ -55,7 +68,7 @@ exports.getBanking = (req,res)=>{
     })
 }
 
-const loan = require('../model/loan')
+
 exports.getLoans = (req,res)=>{
    loan.find({
         phone:req.user.phone
