@@ -315,3 +315,23 @@ exports.getTransactions = (req,res)=>{
          res.status(500);
      })
  }
+
+ exports.getbacking = (req,res)=>{
+    loan.find({
+         phone:req.user.phone
+     }) 
+     .sort({_id:-1})
+     .then(
+         results=>{
+             res.render('backing',{
+                 user : req.user,
+                 loan:results,
+                 dayjs:dayjs
+             })
+         }
+     )
+     .catch(error=>{
+         res.status(500);
+     })
+ }
+ 

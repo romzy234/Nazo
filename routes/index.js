@@ -23,6 +23,7 @@ router.post('/done', controller.postDone);
 
 router.get('/settings', checkAuth,finishAuth,controller.getSettings);
 router.get('/banking', checkAuth,finishAuth,controller.getBanking);
+router.get('/backing', checkAuth,finishAuth,controller.getbacking);
 router.get('/loans', checkAuth,finishAuth,controller.getLoans);
 router.get('/transfer', checkAuth,finishAuth,controller.gettranfer);
 router.get('/loan', checkAuth,finishAuth,controller.getLoan);
