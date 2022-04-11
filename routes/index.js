@@ -26,6 +26,7 @@ router.get('/banking', checkAuth,finishAuth,controller.getBanking);
 router.get('/loans', checkAuth,finishAuth,controller.getLoans);
 router.get('/transfer', checkAuth,finishAuth,controller.gettranfer);
 router.get('/loan', checkAuth,finishAuth,controller.getLoan);
+router.get('/transactions', checkAuth,finishAuth,controller.getTransactions);
 router.post('/loan', checkAuth,finishAuth,controller.postLoan);
 
 

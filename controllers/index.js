@@ -296,3 +296,22 @@ exports.postForgot = (req,res)=>{
  exports.getForgot = (req,res)=>{
     res.render('forget')
 }
+
+exports.getTransactions = (req,res)=>{
+    transactions.find({
+         phone:req.user.phone
+     }) 
+     .sort({_id:-1})
+     .then(
+         results=>{
+             res.render('transactions',{
+                 user : req.user,
+                 transactions:results,
+                 dayjs:dayjs
+             })
+         }
+     )
+     .catch(error=>{
+         res.status(500);
+     })
+ }
