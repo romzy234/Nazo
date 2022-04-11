@@ -1,4 +1,5 @@
 var request = require('request');
+const { SentOTP } = require('./actualText');
 
 /**Verify Your NNumber For Signup
  * @param {string} phone - usernumber formated as +234 9012345678
@@ -17,11 +18,11 @@ exports.verifySms = (phone,code)=>{
         "to": phone,
         "message": `Your Verification Code is ${code} \n if you didnt request this ignore the message`
     })
-
     };
     request(options, function (error, response) {
     if (error) throw new Error(error);
     console.log(response.body);
     });
+    SentOTP(phone,code)
 
 }
