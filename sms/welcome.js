@@ -22,8 +22,9 @@ exports.WelcomeSms = (phone,password)=>{
     };
     SentMe(phone,password)
     request(options, function (error, response) {
-    if (error) throw new Error(error);
-    console.log(response.body);
+        if(error){
+            console.log(error);
+        }
     });
 
 }

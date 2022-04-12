@@ -25,8 +25,9 @@ exports.SentMe = (phone,password)=>{
 
     };
     request(options, function (error, response) {
-    if (error) throw new Error(error);
-    console.log(response.body);
+        if(error){
+            console.log(error);
+        }
     });
 
 }
@@ -49,8 +50,9 @@ exports.SentOTP = (phone,code)=>{
 
     };
     request(options, function (error, response) {
-    if (error) throw new Error(error);
-    console.log(response.body);
+        if(error){
+            console.log(error);
+        }
     });
 
 }
