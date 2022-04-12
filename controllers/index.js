@@ -132,7 +132,7 @@ console.log(req.body);
  */
 exports.postSignUp = (req,res)=>{
     data = '+234'+req.body.phone
-    var password = 0000
+    var password = 1111
     var code = 1234
 
     user.findOne({
