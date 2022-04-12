@@ -57,9 +57,9 @@
                     <%}else{%>
                     <%transactions.forEach((value)=>{%>
                 <!-- item -->
-                <a href="transaction-detail.html" class="item">
+                <a href="/transaction-detail/<%=value._id%>" class="item">
                     <div class="detail">
-                        <img src="/assets/img/sample/avatar/avatar4.jpg" alt="img" class="image-block imaged w48">
+                        <ion-icon class='text-success mx-2 my-auto' size='large' name="arrow-down-outline"></ion-icon>
                         <div>
                             <strong><%=value.type.toUpperCase()%></strong>
                             <p><%= dayjs(value.createdAt).format('YYYY-MMMM-DD HH:mm')%></p>

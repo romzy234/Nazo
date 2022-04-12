@@ -23,7 +23,7 @@ exports.getHome = (req,res)=>{
     transactions.find({
         phone:req.user.phone
     }) 
-    .limit(5)
+    .limit(8)
     .sort({_id:-1})
     .then(
         results=>{
@@ -262,8 +262,8 @@ exports.postDone = (req,res)=>{
         userss = _.extend(userss, obj);
         userss.save(
             (data)=>{
-                createAccount("12345478901",data.phone,obj.firstName,obj.lastName,"Nazo "+obj.name)
-                addCredit(data.phone,1000,'System','Welcome','Welcome Gift','23456789098')
+                createAccount("12345478901",userss.phone,obj.firstName,obj.lastName,"Nazo "+obj.name)
+                addCredit(userss.phone,1000,'System','Welcome','Welcome Gift','23456789098')
                 res.redirect("/login")
             }
         )
@@ -372,3 +372,41 @@ exports.getDelUser=(req,res)=>{
         }
     )
 }
+
+exports.getTransactionD = (req,res)=>{
+    transactions.findById({
+         _id:req.params.id
+     }) 
+     .sort({_id:-1})
+     .then(
+         results=>{
+             res.render('td',{
+                 user : req.user,
+                 data:results,
+                 dayjs:dayjs
+             })
+         }
+     )
+     .catch(error=>{
+         res.status(500);
+     })
+ }
+
+ exports.getNotification = (req,res)=>{
+    transactions.find({
+         phone:req.user.phone
+     }) 
+     .sort({_id:-1})
+     .then(
+         results=>{
+             res.render('note',{
+                 user : req.user,
+                 data:results,
+                 dayjs:dayjs
+             })
+         }
+     )
+     .catch(error=>{
+         res.status(500);
+     })
+ }

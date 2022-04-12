@@ -6,5 +6,4 @@ Default password is 0000
 verification code is 1234
 
 # to do 
-* notifcation 
 * investment

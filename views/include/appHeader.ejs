@@ -6,8 +6,8 @@
     <div class="right">
         <a href="/notifications" class="headerButton  ">
             <ion-icon class="icons notification-icon bg-white round" name="notifications-outline"></ion-icon>
-            <% if(user.notification){%>
-            <span class="badge badge-danger"><%= user.notification.length%></span>
+            <% if(transaction.length){%>
+            <span class="badge badge-danger"><%= transaction.length%></span>
             <%}else{%>
                 <span class="badge badge-danger">0</span>
                 <%}%>

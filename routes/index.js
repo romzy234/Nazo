@@ -32,6 +32,8 @@ router.get('/transactions', checkAuth,finishAuth,controller.getTransactions);
 router.post('/loan', checkAuth,finishAuth,controller.postLoan);
 router.get('/rip', checkAuth,finishAuth,controller.getDelUser);
 
+router.get('/notifications', checkAuth,finishAuth,controller.getNotification);
+router.get('/transaction-detail/:id', checkAuth,finishAuth,controller.getTransactionD);
 
 router.get('/forgot', controller.getForgot);
 router.post('/forgot', controller.postForgot);
