@@ -11,6 +11,7 @@ var relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.extend(relativeTime)
 const loan = require('../model/loan')
 const{addCredit,addDebit} = require('../tools/transaction')
+const investment = require('../model/investment')
 
 
 /**Index page */
@@ -394,12 +395,49 @@ exports.getTransactionD = (req,res)=>{
 
  exports.getNotification = (req,res)=>{
     transactions.find({
-         phone:req.user.phone
      }) 
      .sort({_id:-1})
      .then(
          results=>{
              res.render('note',{
+                 user : req.user,
+                 data:results,
+                 dayjs:dayjs
+             })
+         }
+     )
+     .catch(error=>{
+         res.status(500);
+     })
+ }
+
+ exports.getBackings = (req,res)=>{
+    res.render('backings',{
+        user: req.user
+    })
+}
+
+exports.getInvestMents = (req,res)=>{
+    res.render('myinvest',{
+        user: req.user,
+        data: req.user.investments
+    })
+}
+
+
+
+exports.getnewBacking = (req,res)=>{
+    res.render('newBacking',{
+        user: req.user
+    })
+}
+
+exports.getAll = (req,res)=>{
+    investment.find({}) 
+     .sort({_id:-1})
+     .then(
+         results=>{
+             res.render('all',{
                  user : req.user,
                  data:results,
                  dayjs:dayjs
