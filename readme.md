@@ -2,7 +2,7 @@
 *run npm install
 *open port 3000
 
-##Database 
+## Database 
 The database is a mongod database connected using mongoose 
 
 The file is found in the 
