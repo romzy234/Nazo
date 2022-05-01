@@ -1,4 +1,5 @@
 *clone
+* cd into file
 *run npm install
 *open port 3000
 
